@@ -1,0 +1,8 @@
+.alert {
+    color: red;
+    font-weight: bold;
+}
+p {
+    cursor: pointer;
+    user-select: none;
+}
