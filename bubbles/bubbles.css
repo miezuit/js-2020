@@ -1,0 +1,46 @@
+body {
+    background-color: rgb(237, 213, 133);
+    height: 100vh;
+    overflow: hidden;
+}
+@keyframes bubble {
+    to {
+        transform: translateY(-5vh) scale(2);
+    }
+}
+@keyframes float {
+    25% {
+        transform: rotate(3deg) translate(0.5em, 0.5em);
+    }
+    50% {
+        transform: rotate(0deg) translate(0em, 1em);
+    }
+    75% {
+        transform: rotate(-3deg) translate(-0.5em, 0.5em);
+    }
+}
+.bubble {
+    position: absolute;
+    border-color: tomato;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+    transform: translateY(105vh);
+    animation-name: bubble;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+img {
+    display: block;
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+    height: 50vh;
+    z-index: 1;
+    animation-name: float;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
