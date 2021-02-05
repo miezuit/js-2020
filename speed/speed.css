@@ -1,0 +1,28 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input[type="button"] {
+    background-color: seagreen;
+    color: white;
+    border-radius: 10%;
+    border-style: none;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+}
+.letter {
+    position: absolute;
+    /* top: 10em;
+    right: 10em;
+    background-color: tomato; */
+    padding: 0.5em;
+    border-radius: 10%;
+    font-family: monospace;
+    font-size: 1.5em;
+    color: white;
+}
+.hidden {
+    visibility: hidden;
+}
