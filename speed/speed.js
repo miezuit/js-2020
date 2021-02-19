@@ -2,6 +2,18 @@ let startButton = document.querySelector("input[type='button']")
 
 startButton.addEventListener("click", startGame)
 
+// cand este apasata o tasta apelam functia pressKey
+window.addEventListener("keydown", pressKey)
+
+function pressKey(event) {
+    let letter = event.key.toUpperCase()
+    // gasim primul div care are clasa literei apasate
+    let divs = document.querySelectorAll("." + letter)
+    // facem div-ul sa dispara
+    divs.forEach(div => div.remove())
+    // div.remove()
+}
+
 function startGame() {
     // ascunde butonul
     startButton.classList.add("hidden")
