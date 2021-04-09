@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+        <p>{{ password_input }}</p>
+        <input type="password" v-model="password_input">
+        <meter min="0" max="5" :value="score"></meter>
+        <ul>
+            <li>Has small letters</li>
+            <li>Has capital letters</li>
+        </ul>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            el: ".app",
+            data: {
+                password_input: ""
+            },
+            methods: {
+                hasSmallLetter: function () {
+                    return /[a-z]/.test(this.password_input)
+                },
+                hasCapitalLetter: function () {
+                    return /[A-Z]/.test(this.password_input)
+                },
+                hasDigitLetter: function () {
+                    return /[0-9]/.test(this.password_input)
+                },
+                hasSpecialChar: function () {
+                    return /[^a-zA-Z0-9]/.test(this.password_input)
+                },
+                isLargerThanEight: function () {
+                    return this.password_input.length >= 8
+                }
+            },
+            computed: {
+                score() {
+                    return [
+                        this.hasSmallLetter, 
+                        this.hasCapitalLetter,
+                        this.hasDigitLetter, 
+                        this.hasSpecialChar, 
+                        this.isLargerThanEight,
+                    ].reduce(
+                        (accumulator, currentFunction) => accumulator + currentFunction(), 0
+                    )
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
