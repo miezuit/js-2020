@@ -12,7 +12,7 @@ class BaseHero {
         return this.mana
     }
     setMana(newMana) {
-        if (newMana < 0) throw 'Invalid value for mana' 
+        if (newMana < 0) throw new RangeError('Invalid value for mana')
         this.mana = newMana
     }
     firePrimary() {}
