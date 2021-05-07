@@ -1,0 +1,8 @@
+.desc, .remove, .edit {
+    user-select: none;
+    cursor: pointer;
+}
+li.done .desc {
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.543);
+}
