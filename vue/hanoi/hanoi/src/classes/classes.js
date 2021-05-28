@@ -50,10 +50,13 @@ class Tower {
         return this.disks.pop()
     }
     canPut(disk) {
-        return this.topDisk().isBiggerThan(disk)
+        return this.isEmpty() || this.topDisk().isBiggerThan(disk)
     }
     topDisk() {
         return this.disks[this.disks.length - 1]
+    }
+    isEmpty() {
+        return this.disks.length == 0
     }
 }
 
@@ -76,6 +79,7 @@ class Game {
         return disks.reverse()
     }
     make(move) {
+        if (!this.canMake(move)) return
         let fromTower = this.towers.find(tower => tower.id == move.fromTowerId)  
         let toTower = this.towers.find(tower => tower.id == move.toTowerId)
         let disk = fromTower.take()
