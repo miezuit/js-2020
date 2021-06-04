@@ -3,7 +3,14 @@ class Welcome extends React.Component {
         super(props)
     }
     render() {
-        return <h1>Hello {this.props.name.toUpperCase() } </h1>
+        const renderh1 = () => {
+            if(this.props.name === 'Radu') {
+                return <h1>Hello, sir!</h1>
+            }
+            return <h1>Hello {this.props.name.toUpperCase() } </h1>
+        }
+        const h1 = renderh1()
+        return <div>{h1}</div>
     }
 }
 class Clicker extends React.Component {
