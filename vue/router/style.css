@@ -1,0 +1,17 @@
+.router-link-exact-active {
+    font-weight: bold;
+    color: orange;
+}
+.mytransition-enter-active {
+    animation-name: fade;
+    animation-duration: 0.5s;
+    animation-direction: reverse;
+}
+.mytransition-leave-active {
+    animation-name: fade;
+    animation-duration: 0.5s;
+}
+@keyframes fade {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
