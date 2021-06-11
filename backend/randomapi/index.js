@@ -3,7 +3,7 @@ const app = express()
 const port = 8080
 
 function random(min, max) {
-    console.log(`min = ${min}, max = ${max}`)
+    console.log(`range: min = ${min}, max = ${max}`)
     return { 
         number: Math.floor(Math.random() * (max - min)) + min
     }
