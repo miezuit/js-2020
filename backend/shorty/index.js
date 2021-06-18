@@ -1,14 +1,12 @@
 const express = require('express')
 const app = express()
 const port = 8080
+const idChars = 'abcdefghijklmopqrstwvxyz0123456789'
+const idLength = 8
 
 storage = []
 
 function createShortUri(req, resp) {
-
-}
-
-function redirectToLongUri(req, resp) {
     const longUri = req.body.longUri
     const id = generateId()
     storage[id] = longUri
@@ -17,8 +15,17 @@ function redirectToLongUri(req, resp) {
     })
 }
 
+function redirectToLongUri(req, resp) {
+
+}
+
 function generateId() {
-    return Math.floor(Math.random() * 100000) + 10000
+    let id = ''
+    for(let i=0; i<idLength; i++) {
+        let randomPosition = Math.floor(Math.random() * idChars.length)
+        id = id + idChars[randomPosition]
+    }
+    return id
 }
 
 // inregistram middleware care sa parseze json
