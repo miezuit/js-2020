@@ -8,11 +8,16 @@ async function shortify() {
     const request = {
         longUri: input.value
     }
+    const body = JSON.stringify(request)
+    console.log(body)
     const resp = await fetch(
         'http://localhost:8080/short',
         {
             method: "POST",
-            body: JSON.stringify(request)
+            body: body,
+            headers: {  
+                'Content-Type': 'application/json'
+            },
         }
     )
     const json = await resp.json()

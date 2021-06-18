@@ -28,7 +28,6 @@ function redirectToLongUri(req, resp) {
         return
     }
     resp.redirect(301, longUri)
-        .send()
 }
 
 function generateId() {
