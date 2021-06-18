@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const port = 8080
 const idChars = 'abcdefghijklmopqrstwvxyz0123456789'
@@ -8,6 +9,7 @@ storage = []
 
 function createShortUri(req, resp) {
     const longUri = req.body.longUri
+    console.log(req.body)
     const id = generateId()
     storage[id] = longUri
     resp.send({
@@ -16,7 +18,17 @@ function createShortUri(req, resp) {
 }
 
 function redirectToLongUri(req, resp) {
-
+    const id = req.params.id
+    console.log(id)
+    longUri = storage[id]
+    console.log(longUri)
+    console.log(storage)
+    if (longUri === undefined) {
+        resp.status(404).send()
+        return
+    }
+    resp.redirect(301, longUri)
+        .send()
 }
 
 function generateId() {
@@ -29,7 +41,10 @@ function generateId() {
 }
 
 // inregistram middleware care sa parseze json
+// inregistram middleware pentru cors
+app.use(cors())
 app.use(express.json())
+
 
 // definim rutele
 app.post('/short', createShortUri)
