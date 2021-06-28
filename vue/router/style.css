@@ -3,7 +3,7 @@
     color: orange;
 }
 .mytransition-enter-active {
-    animation-name: fade;
+    animation-name: heartBeat;
     animation-duration: 0.5s;
     animation-direction: reverse;
 }
