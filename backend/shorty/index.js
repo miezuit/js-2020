@@ -1,26 +1,32 @@
 const express = require('express')
 const cors = require('cors')
+const redis = require('redis')
+const { promisify } = require("util")
 const app = express()
 const port = 8080
 const idChars = 'abcdefghijklmopqrstwvxyz0123456789'
 const idLength = 8
 
-storage = []
+const storage = redis.createClient({
+    port: 6380,
+    host: '127.0.0.1'
+})
 
 function createShortUri(req, resp) {
     const longUri = req.body.longUri
     console.log(req.body)
     const id = generateId()
-    storage[id] = longUri
+    storage.set(id, longUri)
     resp.send({
         shortUri: `http://localhost:${port}/short/${id}`
     })
 }
 
-function redirectToLongUri(req, resp) {
+async function redirectToLongUri(req, resp) {
     const id = req.params.id
     console.log(id)
-    longUri = storage[id]
+    const asyncGet = promisify(storage.get).bind(storage)
+    longUri = await asyncGet(id)
     console.log(longUri)
     console.log(storage)
     if (longUri === undefined) {
