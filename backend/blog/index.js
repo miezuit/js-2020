@@ -21,6 +21,14 @@ function generateToken(email) {
     return jwt.sign(data, secret)
 }
 
+function verifyToken(token) {
+    try {
+        return jwt.verify(token, secret)
+    } catch(err) {
+        return null
+    }
+}
+
 function createUser(req, resp) {
     let email = req.body.email
     let password = req.body.password
@@ -64,11 +72,26 @@ function login(req, resp) {
     )
 }
 
+function createPost(req, resp) {
+    const title = req.body.title
+    const content = req.body.content
+
+    const query = 'INSERT INTO post VALUES(NULL, ?, ?)'
+
+    connection.query(
+        query,
+        [title, content]
+    )
+
+    resp.sendStatus(200)
+}
+
 app.use(cors())
 app.use(express.json())
 
 app.post('/user', createUser)
 app.get('/login', login)
+app.post('/posts', createPost)
 
 app.listen(
     port,
