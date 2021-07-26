@@ -114,6 +114,43 @@ function getAllPosts(req, resp) {
     )
 }
 
+function editPost(req, resp) {
+    if (verifyToken(req.token) === null) {
+        resp.sendStatus(401)
+        return
+    } 
+
+    const id = req.params.id
+    const title = req.body.title
+    const content = req.body.content
+
+    const query = 'UPDATE post SET title = ?, content = ? WHERE id = ?'
+
+    connection.query(
+        query,
+        [title, content, id]
+    )
+
+    resp.sendStatus(200)
+}
+
+function deletePost(req, resp) {
+    if (verifyToken(req.token) === null) {
+        resp.sendStatus(401)
+        return
+    }
+
+    const id = req.params.id
+
+    const query = 'DELETE FROM post WHERE id = ?'
+
+    connection.query(
+        query,
+        [id],
+        (err, result) => resp.sendStatus(200)
+    )
+}
+
 app.use(cors())
 app.use(express.json())
 app.use(bearerToken())
@@ -122,6 +159,8 @@ app.post('/user', createUser)
 app.get('/login', login)
 app.post('/posts', createPost)
 app.get('/posts', getAllPosts)
+app.put('/posts/:id', editPost)
+app.delete('/posts/:id', deletePost)
 
 app.listen(
     port,

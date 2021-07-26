@@ -78,7 +78,49 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-
-     
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title: 
+                      type: string
+                    content:
+                      type: string
+  /posts/{id}:
+    put:
+      summary: Edit a post
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  content:
+                    type: string
+      responses:
+        200:
+          description: Post edited successfully  
+    delete:
+      summary: Delete a post
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Post was deleted      
+      
+    
     
