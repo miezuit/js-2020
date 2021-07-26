@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken")
 const { response } = require('express')
 const app = express()
 const port = 8080
+const secret = 'dasopewdsdscn#sda=09da'
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -12,6 +13,13 @@ const connection = mysql.createConnection({
     password: 'example',
     database: 'blog'
 })
+
+function generateToken(email) {
+    const data = {
+        email: email
+    }
+    return jwt.sign(data, secret)
+}
 
 function createUser(req, resp) {
     let email = req.body.email
@@ -43,7 +51,7 @@ function login(req, resp) {
         query,
         [email, password],
         (err, result) => {
-            const token = 'dnoid3ireh12h'
+            const token = generateToken(email)
             if (result.length == 1) {
                 resp.status(200)
                     .send(token)
