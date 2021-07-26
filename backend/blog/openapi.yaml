@@ -5,9 +5,18 @@ info:
   version: 1.0.0
 servers:
 - url: http://localhost:8080
+security:
+- jwt: []
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
   /user:
     post:
+      summary: Sign up
       requestBody:
         content:
           application/json:
@@ -24,6 +33,7 @@ paths:
           description: User created successfully
   /login:
     get:
+      summary: Login
       parameters:
         - name: email
           in: query
@@ -44,5 +54,31 @@ paths:
                 type: string
         400:
           description: Invalid user/password
+  /posts:
+    post:
+      summary: Create a new post
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  content:
+                    type: string
+      responses:
+        200:
+          description: Post created successfully  
+    get:
+      summary: Get all posts
+      responses:
+        200:
+          description: List of all posts
+          content:
+            application/json:
+              schema:
+                type: string
+
      
-  
+    

@@ -19,7 +19,15 @@ function generateToken(email) {
     const data = {
         email: email
     }
-    return jwt.sign(data, secret)
+    // TODO: also add a lifetime for the token (eg: 30 min)
+    return jwt.sign(data, secret, { expiresIn: 30 * 60 })
+}
+
+function renewToken(token) {
+    // TODO:
+    // verify token
+    // if token is valid create a new token with extended lifetime
+    // return the new token
 }
 
 function verifyToken(token) {
@@ -92,6 +100,20 @@ function createPost(req, resp) {
     resp.sendStatus(200)
 }
 
+function getAllPosts(req, resp) {
+    const query = 'SELECT * FROM post'
+
+    connection.query(
+        query,
+        [],
+        (err, result) => {
+            resp.status(200)
+                .json(result)
+                .send()
+        }
+    )
+}
+
 app.use(cors())
 app.use(express.json())
 app.use(bearerToken())
@@ -99,6 +121,7 @@ app.use(bearerToken())
 app.post('/user', createUser)
 app.get('/login', login)
 app.post('/posts', createPost)
+app.get('/posts', getAllPosts)
 
 app.listen(
     port,
