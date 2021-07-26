@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/nodemon/bin/nodemon.js",
+    "start": "node node_modules/nodemon/bin/nodemon.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.12"
   }
