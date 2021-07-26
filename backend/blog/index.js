@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2')
 const jwt = require("jsonwebtoken")
+const bearerToken = require("express-bearer-token")
 const { response } = require('express')
 const app = express()
 const port = 8080
@@ -66,13 +67,18 @@ function login(req, resp) {
             } else {
                 // TODO: block access from IP/email if too many failed attempts
                 console.log(`WARNING: failed attempt to login ${email}`)
-                resp.sendStatus(400)
+                resp.sendStatus(401)
             } 
         }
     )
 }
 
 function createPost(req, resp) {
+    if (verifyToken(req.token) === null) {
+        resp.sendStatus(401)
+        return
+    } 
+
     const title = req.body.title
     const content = req.body.content
 
@@ -88,6 +94,7 @@ function createPost(req, resp) {
 
 app.use(cors())
 app.use(express.json())
+app.use(bearerToken())
 
 app.post('/user', createUser)
 app.get('/login', login)
