@@ -18,6 +18,7 @@ camera.position.z = 30
 // adaugam camera in scena
 scene.add(camera)
 
+// cream doua materiale colorate
 const phongBlue = new THREE.MeshPhongMaterial({
     color: 0x224f89
 })
@@ -42,9 +43,6 @@ qube.position.x = -10
 
 // cream un torus
 const torusForm = new THREE.TorusGeometry(10, 1.5, 6, 12)
-// const phong = new THREE.MeshPhongMaterial({
-//     color: 0x224f89
-// })
 const torus = new THREE.Mesh(torusForm, phongOrange)
 scene.add(torus)
 torus.rotation.set(0.4, 0.4, 0)
@@ -74,5 +72,3 @@ function render() {
     torus.rotation.x += 0.01
 }
 render()
-
-
