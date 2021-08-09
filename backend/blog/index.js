@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 const bearerToken = require("express-bearer-token")
 const { response } = require('express')
 const app = express()
-const port = 8080
+const port = 8000
 const secret = 'dasopewdsdscn#sda=09da'
 
 const connection = mysql.createConnection({
@@ -114,6 +114,27 @@ function getAllPosts(req, resp) {
     )
 }
 
+function viewPost(req, resp) {
+    if (verifyToken(req.token) === null) {
+        resp.sendStatus(401)
+        return
+    }
+
+    const id = req.params.id
+
+    const query = 'SELECT * FROM post WHERE id = ?'
+
+    connection.query(
+        query,
+        [id],
+        (err, result) => {
+            resp.status(200)
+                .json(result[0])
+                .send()
+        }
+    )
+}
+
 function editPost(req, resp) {
     if (verifyToken(req.token) === null) {
         resp.sendStatus(401)
@@ -160,6 +181,7 @@ app.get('/login', login)
 app.post('/posts', createPost)
 app.get('/posts', getAllPosts)
 app.put('/posts/:id', editPost)
+app.get('/posts/:id', viewPost)
 app.delete('/posts/:id', deletePost)
 
 app.listen(

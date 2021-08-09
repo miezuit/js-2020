@@ -4,7 +4,7 @@ info:
   description: 'Blog API'
   version: 1.0.0
 servers:
-- url: http://localhost:8080
+- url: http://localhost:8000
 security:
 - jwt: []
 components:
@@ -89,6 +89,28 @@ paths:
                     content:
                       type: string
   /posts/{id}:
+    get:
+      summary: Get a post
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Post data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: 
+                    type: integer
+                  title: 
+                    type: string
+                  content:
+                    type: string
     put:
       summary: Edit a post
       parameters:
@@ -122,5 +144,3 @@ paths:
         200:
           description: Post was deleted      
       
-    
-    
