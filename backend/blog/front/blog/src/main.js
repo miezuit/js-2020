@@ -12,6 +12,8 @@ import router from './router/router'
 new Vue({
   store,
   router,
-  beforeCreate() { this.$store.commit('initializeStore') }, 
+  beforeCreate() { 
+    this.$store.commit('initializeStore')
+  }, 
   render: h => h(App)
 }).$mount('#app')
