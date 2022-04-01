@@ -1,7 +1,9 @@
 class BaseHero {
+    name
     health
     mana
-    constructor(health, mana) {
+    constructor(name, health, mana) {
+        this.name = name
         this.health = health
         this.mana = mana
     }
@@ -47,6 +49,10 @@ class Batman extends BaseHero {
         }
     }
 }
+
+let ironMan = new BaseHero('Stark', 100, 200)
+ironMan.receiveHit()
+ironMan.firePrimary()
 
 let clark = new Superman()
 let bruce = new Batman()
